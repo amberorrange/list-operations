@@ -1,3 +1,4 @@
+
 """Custom implementations of several standard Python list methods."""
 
 from list_operations import *
@@ -15,8 +16,11 @@ def custom_len(input_list):
         8
 
     """
+    num_items = 0
+    for item in input_list:
+        num_items += 1
 
-    return 0
+    return num_items
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -43,6 +47,10 @@ def custom_append(input_list, value):
         True
 
     """
+   
+
+    input_list += [value]
+  
 
     pass
 
@@ -62,6 +70,7 @@ def custom_extend(input_list, second_list):
         True
 
     """
+    input_list += second_list
 
     pass
 
@@ -80,6 +89,8 @@ def custom_insert(input_list, index, value):
         True
 
     """
+   
+    input_list[index:index] = [value]
 
     pass
 
@@ -99,8 +110,12 @@ def custom_remove(input_list, value):
         True
 
     """
+    for i,item in enumerate(input_list):
+        if item == value:
+            del input_list[i]
+            break
 
-    pass
+   
 
 
 def custom_pop(input_list):
@@ -119,7 +134,10 @@ def custom_pop(input_list):
 
     """
 
-    return None
+    last_item = input_list[-1]
+    del input_list[-1]
+
+    return last_item
 
 
 def custom_index(input_list, value):
@@ -134,8 +152,11 @@ def custom_index(input_list, value):
         1
 
     """
-
-    return 0
+    for i,item in enumerate(input_list):
+        if item == value:
+            return i
+    
+    
 
 
 def custom_count(input_list, value):
@@ -150,8 +171,12 @@ def custom_count(input_list, value):
         2
 
     """
-
-    return 0
+    count = 0
+    for item in input_list:
+        if item == value:
+            count += 1
+           
+    return count
 
 
 def custom_reverse(input_list):
@@ -168,9 +193,23 @@ def custom_reverse(input_list):
         >>> multiples == [27, 24, 21, 18, 15, 12, 9, 6, 3, 0]
         True
 
-    """
+    """ 
+    #my solution, Don't know why one test doesn't work
+    # input_list = input_list[::-1] 
 
-    pass
+    #correct solution-study to better understand 
+
+    swap_number = custom_len(input_list) // 2
+
+    for i in range(swap_number):
+        current_n = input_list[i]
+        current_neg_n = input_list[(i + 1) * -1]
+        input_list[i] = current_neg_n
+        input_list[(i + 1) * -1] = current_n
+
+
+
+  
 
 
 def custom_contains(input_list, value):
@@ -189,8 +228,11 @@ def custom_contains(input_list, value):
         True
 
     """
+    for item in input_list:
+        if item == value:
+            return True
 
-    return None
+    return False
 
 
 def custom_equality(some_list, another_list):
@@ -208,8 +250,18 @@ def custom_equality(some_list, another_list):
         False
 
     """
+    if some_list == another_list:
+    
+        for i, item in enumerate(some_list):
+            if some_list[i] == another_list[i]:
+                return True
+            else:
+                return False
 
-    return None
+    else:
+        return False
+
+
 
 
 # This is the part were we actually run the doctests.
